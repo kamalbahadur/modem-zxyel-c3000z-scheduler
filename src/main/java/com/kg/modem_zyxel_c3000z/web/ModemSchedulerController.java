@@ -29,7 +29,7 @@ public class ModemSchedulerController {
                            @RequestParam(required = false) Integer minute,
                            @RequestParam(required = false) Boolean connect) {
 
-        if ("show".equals(operation)) {
+        if ("view".equals(operation)) {
             List<Schedule> schedules = scheduleDao.findAll();
             try {
                 return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(schedules);

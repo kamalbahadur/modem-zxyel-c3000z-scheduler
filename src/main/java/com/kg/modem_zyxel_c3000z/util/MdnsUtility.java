@@ -42,8 +42,9 @@ public class MdnsUtility {
                 Integer.parseInt(serverPort), "");
         Map<String, String> properties = new HashMap<>();
         properties.put("DB Console", "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + serverPort + "/h2-console");
-        properties.put("View", "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + serverPort + "/?operation=show");
-        properties.put("Update", "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + serverPort + "/?operation=update&day=MONDAY&hour=22&minute=30&connect=False");
+        properties.put("View", "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + serverPort + "/?operation=view");
+        properties.put("Add/Update", "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + serverPort + "/?operation=update&day=MONDAY&hour=22&minute=30&connect=False");
+        properties.put("Delete", "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + serverPort + "/?operation=delete&day=MONDAY&hour=22&minute=30");
         serviceInfo.setText(properties);
         jmdns.registerService(serviceInfo);
     }
