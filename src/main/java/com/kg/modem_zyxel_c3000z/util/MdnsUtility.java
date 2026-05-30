@@ -45,6 +45,9 @@ public class MdnsUtility {
         properties.put("View", "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + serverPort + "/schedule?operation=view");
         properties.put("Add/Update", "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + serverPort + "/schedule?operation=update&day=MONDAY&hour=22&minute=30&connect=False");
         properties.put("Delete", "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + serverPort + "/schedule?operation=delete&day=MONDAY&hour=22&minute=30");
+        properties.put("Pause", "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + serverPort + "/schedule?operation=pause");
+        properties.put("Resume", "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + serverPort + "/schedule?operation=resume");
+        properties.put("Status", "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + serverPort + "/schedule?operation=status");
         serviceInfo.setText(properties);
         jmdns.registerService(serviceInfo);
     }

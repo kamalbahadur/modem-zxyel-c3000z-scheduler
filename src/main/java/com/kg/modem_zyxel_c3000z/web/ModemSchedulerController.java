@@ -14,11 +14,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kg.modem_zyxel_c3000z.dao.ScheduleDao;
 import com.kg.modem_zyxel_c3000z.entity.Schedule;
 import com.kg.modem_zyxel_c3000z.entity.ScheduleId;
+import com.kg.modem_zyxel_c3000z.util.SchedulerPause;
 
 @RestController
 public class ModemSchedulerController {
 
     @Autowired ScheduleDao scheduleDao;
+    @Autowired SchedulerPause schedulerPause;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -69,6 +71,14 @@ public class ModemSchedulerController {
             }
 
             return "{\"message\":\"Deleted!\"}";
+        } else if ("pause".equals(operation)) {
+            schedulerPause.pause();
+            return "{\"paused\":true,\"message\":\"Scheduled connect/disconnect paused\"}";
+        } else if ("resume".equals(operation)) {
+            schedulerPause.resume();
+            return "{\"paused\":false,\"message\":\"Scheduled connect/disconnect resumed\"}";
+        } else if ("status".equals(operation)) {
+            return "{\"paused\":" + schedulerPause.isPaused() + "}";
         } else {
             return "{\"message\":\"Operation not supported\"}";
         }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.kg.modem_zyxel_c3000z.dao.ScheduleDao;
 import com.kg.modem_zyxel_c3000z.entity.Schedule;
 import com.kg.modem_zyxel_c3000z.entity.ScheduleId;
+import com.kg.modem_zyxel_c3000z.util.SchedulerPause;
 import com.kg.modem_zyxel_c3000z.util.WifiHandler;
 
 @Component
@@ -17,9 +18,14 @@ public class Monitor {
 
     @Autowired ScheduleDao scheduleDao;
     @Autowired WifiHandler wifiHandler;
+    @Autowired SchedulerPause schedulerPause;
 
     @Scheduled(cron = "0 * * * * *")
     public void run() {
+        if (schedulerPause.isPaused()) {
+            return;
+        }
+
         LocalDateTime now = LocalDateTime.now();
         String day = now.getDayOfWeek().toString();
         Integer hour = now.getHour();
